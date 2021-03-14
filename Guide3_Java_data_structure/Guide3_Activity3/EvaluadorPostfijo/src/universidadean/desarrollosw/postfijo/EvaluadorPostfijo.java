@@ -54,28 +54,12 @@ public class EvaluadorPostfijo {
                     }
                 }
             }
-            return pila.pop();
-
-        System.out.println("lista " + expresion);
-        System.out.println("Pila " + pila);
-
-    // TODO: Realiza la evaluación de la expresión en formato postfijo
+        }
+         return pila.pop();
     }
-
+    
     /**
      * Programa principal
-     * for (String elem : tok) {
-     *             if (elem.equals(Token.TokenType.TOKEN_OPERATOR)) {
-     *
-     *             }
-     *             pila.push(Integer.parseInt(elem));
-     *             }
-     *
-     *         System.out.println("lista " + tok);
-     *         System.out.println("Pila " + pila);
-     *
-     *
-     *         List<String> operaccion = new LinkedList<>();
      */
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
@@ -90,6 +74,5 @@ public class EvaluadorPostfijo {
         catch (Exception e) {
             System.err.printf("Error grave en la expresión: %s", e.getMessage());
         }
-
     }
 }
