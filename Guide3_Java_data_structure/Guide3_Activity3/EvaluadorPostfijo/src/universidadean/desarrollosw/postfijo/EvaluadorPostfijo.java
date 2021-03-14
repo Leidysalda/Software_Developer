@@ -23,29 +23,59 @@ public class EvaluadorPostfijo {
      * @param expresion una lista de elementos con números u operadores
      * @return el resultado de la evaluación de la expresión.
      */
-    static int evaluarPostFija(List<String> tok) {
+    static int evaluarPostFija(List<String> expresion) {
+        // create a stack
         Stack<Integer> pila = new Stack<>();
 
-        for (String elem : tok) {
-            if (elem.equals(Token.TokenType.TOKEN_OPERATOR)) {
+        // Scan all characters one by one
+        for (String elem : expresion) {
+            for (int i = 0; i < elem.length(); i++) {
+                char c = elem.charAt(i);
 
-            }
-            pila.push(Integer.parseInt(elem));
-            }
+                if (Character.isDigit(c)) {
+                    pila.push(c - '0');
+                } else {
+                    int value1 = pila.pop();
+                    int value2 = pila.pop();
 
-        System.out.println("lista " + tok);
+                    switch (c) {
+                        case '+':
+                            pila.push(value2 + value1);
+                            break;
+                        case '-':
+                            pila.push(value2 - value1);
+                            break;
+                        case '*':
+                            pila.push(value2 * value2);
+                            break;
+                        case '/':
+                            pila.push(value2 / value2);
+                            break;
+                    }
+                }
+            }
+            return pila.pop();
+
+        System.out.println("lista " + expresion);
         System.out.println("Pila " + pila);
 
-
-        List<String> operaccion = new LinkedList<>();
-
-        // TODO: Realiza la evaluación de la expresión en formato postfijo
-
-        return pila.pop();
+    // TODO: Realiza la evaluación de la expresión en formato postfijo
     }
 
     /**
      * Programa principal
+     * for (String elem : tok) {
+     *             if (elem.equals(Token.TokenType.TOKEN_OPERATOR)) {
+     *
+     *             }
+     *             pila.push(Integer.parseInt(elem));
+     *             }
+     *
+     *         System.out.println("lista " + tok);
+     *         System.out.println("Pila " + pila);
+     *
+     *
+     *         List<String> operaccion = new LinkedList<>();
      */
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
