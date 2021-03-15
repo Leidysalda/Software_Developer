@@ -20,6 +20,7 @@ public class EvaluadorPostfijo {
 
     /**
      * Realiza la evaluación de la expresión postfijo utilizando una pila
+     *
      * @param expresion una lista de elementos con números u operadores
      * @return el resultado de la evaluación de la expresión.
      */
@@ -27,37 +28,41 @@ public class EvaluadorPostfijo {
         // create a stack
         Stack<Integer> pila = new Stack<>();
 
-        // Scan all characters one by one
-        for (String elem : expresion) {
-            for (int i = 0; i < elem.length(); i++) {
-                char c = elem.charAt(i);
+        // Scan all strings of list
+        for (int i = 0; i < expresion.size(); i++) {
+            String elem = expresion.get(i);
 
-                if (Character.isDigit(c)) {
-                    pila.push(c - '0');
-                } else {
+            try {
+                pila.push(Integer.parseInt(elem));
+                //System.out.println(pila);
+                continue;
+            } catch (Exception e) {
+                if (pila.size() >= 2) {
                     int value1 = pila.pop();
                     int value2 = pila.pop();
-
-                    switch (c) {
-                        case '+':
+                    switch (elem) {
+                        case "+":
                             pila.push(value2 + value1);
                             break;
-                        case '-':
+                        case "-":
                             pila.push(value2 - value1);
                             break;
-                        case '*':
-                            pila.push(value2 * value2);
+                        case "*":
+                            pila.push(value2 * value1);
                             break;
-                        case '/':
-                            pila.push(value2 / value2);
+                        case "/":
+                            pila.push(value2 / value1);
                             break;
+                        default:
+                            System.err.printf("Error grave en la expresión: %s", e.getMessage());
                     }
                 }
+
             }
         }
-         return pila.pop();
+        return pila.pop();
     }
-    
+
     /**
      * Programa principal
      */
@@ -74,5 +79,6 @@ public class EvaluadorPostfijo {
         catch (Exception e) {
             System.err.printf("Error grave en la expresión: %s", e.getMessage());
         }
+
     }
 }
