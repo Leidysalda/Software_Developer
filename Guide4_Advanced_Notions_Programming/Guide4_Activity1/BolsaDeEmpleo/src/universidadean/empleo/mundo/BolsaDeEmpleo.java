@@ -11,10 +11,9 @@
  */
 package universidadean.empleo.mundo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import com.sun.source.tree.WhileLoopTree;
+
+import java.util.*;
 
 /**
  * Es la clase que se encarga de manejar y organizar los aspirantes <br>
@@ -284,27 +283,22 @@ public class BolsaDeEmpleo {
      */
     public int eliminarAspirantesPorExperiencia(int aniosExperiencia) {
         int eliminados = 0;
-        int cont = 0;
+        Aspirante cont;
 
         ordenarPorAniosDeExperiencia();
         System.out.println(aniosExperiencia);
 
-        while (aspirantes.get(0).darAniosExperiencia() <= aniosExperiencia ) {
-            eliminados = eliminados + 1;
-            System.out.println(aspirantes.get(0).darNombre() + "  experiencia: " + aspirantes.get(0).darAniosExperiencia());
-            aspirantes.remove(eliminados);
-        }
-        cont++;
-        /**for (int i = 0; i < aspirantes.size(); i++) {
-            cont = 0;
-            if (aspirantes.get(i).darAniosExperiencia() <= aniosExperiencia) {
-                eliminados = eliminados + 1;
-                System.out.println(aspirantes.get(i).darNombre() + "  experiencia: " + aspirantes.get(i).darAniosExperiencia());
-                aspirantes.remove(cont);
-            };
-        }*/
+        Iterator i = aspirantes.iterator();
 
-        // TODO: Realizar el ejercicio correspondiente
+        while (i.hasNext()) {
+            cont = (Aspirante) i.next();
+            if (cont.darAniosExperiencia() <= aniosExperiencia) {
+                eliminados = eliminados + 1;
+                System.out.println(cont.darNombre() + "  experiencia: " + cont.darAniosExperiencia());
+                i.remove();
+            }
+        }
+        // TOD: Realizar el ejercicio correspondiente
 
         return eliminados;
     }
